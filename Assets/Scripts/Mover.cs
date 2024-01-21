@@ -6,7 +6,7 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] private float _flyUpForce = 10;
     [SerializeField] private float _movingSpeed = 1f;
-    [SerializeField]private Jet _jet;
+    [SerializeField] private Jet _jet;
 
     private Rigidbody2D _rigidbody2D;
 
