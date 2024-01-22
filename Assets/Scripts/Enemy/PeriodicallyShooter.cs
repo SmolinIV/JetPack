@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PeriodicallyShooter : MonoBehaviour
 {
-    [SerializeField] private float _shootingDelay = 1f;
+    [SerializeField] private float _shootingDelay = 1.4f;
 
     private Attacker _attacker;
     private Coroutine _shooting;
@@ -39,9 +39,9 @@ public class PeriodicallyShooter : MonoBehaviour
 
         while (gameObject.activeSelf)
         {
-            _attacker.Shoot();
-
             yield return delay;
+
+            _attacker.Shoot();
         }
     }
 }

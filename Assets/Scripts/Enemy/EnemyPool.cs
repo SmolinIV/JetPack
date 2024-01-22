@@ -38,4 +38,10 @@ public class EnemyPool : MonoBehaviour
 
         return false;
     }
+
+    public void DisableAllEnemies()
+    {
+        foreach (Enemy enemy in _enemies)
+            enemy.gameObject.SetActive(false);
+    }
 }

@@ -3,17 +3,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(EnemyPool))]
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IStopable
 {
     [SerializeField] private float _spawnFrequency = 2;
-    [SerializeField] private Transform _upperLimitY;
-    [SerializeField] private Transform _lowerLimitY;
+    [SerializeField] private Transform _upperLimitPosition;
+    [SerializeField] private Transform _lowerLimitPosition;
 
     private EnemyPool _enemyPool;
     private Coroutine _spawningEnemies;
+    private Vector3 _startPosition;
 
-    private Vector3 _upperPosition;
-    private Vector3 _lowerPosition;
+    private float _upperLimitY;
+    private float _lowerLimitY;
 
     private void OnDisable()
     {
@@ -25,18 +26,20 @@ public class EnemySpawner : MonoBehaviour
     {
         _enemyPool = GetComponent<EnemyPool>();
 
-        _upperPosition = _upperLimitY.transform.position;
-        _lowerPosition = _lowerLimitY.transform.position;
-        _upperLimitY.gameObject.SetActive(false);
-        _lowerLimitY.gameObject.SetActive(false);
+        _upperLimitY = _upperLimitPosition.position.y;
+        _lowerLimitY = _lowerLimitPosition.position.y;
+        _upperLimitPosition.gameObject.SetActive(false);
+        _lowerLimitPosition.gameObject.SetActive(false);
+    }
 
-        _spawningEnemies = StartCoroutine(SpawnEnemy());
+    public void Start()
+    {
+        _startPosition = transform.position;
     }
 
     private Vector3 GetNewRandomPosition()
     {
-        System.Random random = new System.Random();
-        float newPositionY = (float)(random.NextDouble() * (_upperPosition.y - _lowerPosition.y) + _lowerPosition.y);
+        float newPositionY = Random.Range(_lowerLimitY, _upperLimitY);
 
         return new Vector3(transform.position.x, newPositionY);
     }
@@ -47,10 +50,32 @@ public class EnemySpawner : MonoBehaviour
 
         while (gameObject.activeSelf)
         {
+            yield return delay;
+
             transform.position = GetNewRandomPosition();
             _enemyPool.TryGetEnemy(out Enemy enemy);
 
-            yield return delay;
         }
+
+        yield break;
+    }
+
+    public void StopWorking()
+    {
+        if (_spawningEnemies != null)
+            StopCoroutine(_spawningEnemies);
+
+        ResetCondition();
+    }
+
+    public void ResetCondition()
+    {
+        _enemyPool.DisableAllEnemies();
+    }
+
+    public void StartWorking()
+    {
+        transform.position = _startPosition;
+        _spawningEnemies = StartCoroutine(SpawnEnemy());
     }
 }

@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52adbfeea640384fb5c0cb871fddfbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootingDelay: 1.75
+  _shootingDelay: 1
 --- !u!82 &5422003522506051676
 AudioSource:
   m_ObjectHideFlags: 0

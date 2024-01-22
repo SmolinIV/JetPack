@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(PlayerCollisionHandler))]
 
-public class Player : MonoBehaviour, IDamagable
+public class Player : MonoBehaviour, IDamagable, IStopable
 {
     public event Action PlayerDied;
 
@@ -18,7 +18,6 @@ public class Player : MonoBehaviour, IDamagable
         _mover = GetComponent<Mover>();
         _attacker = GetComponent<Attacker>();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
-        gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -42,17 +41,23 @@ public class Player : MonoBehaviour, IDamagable
 
     public void TakeCriticalHit()
     {
-        _mover.Stop();
-        gameObject.SetActive(false);
-
         PlayerDied?.Invoke();
     }
 
-    public void GetReady()
+    public void StopWorking()
     {
-        _mover.ResetPosition();
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
 
-        _mover.StartMovingForward();
+    public void ResetCondition()
+    {
+        _mover.ResetPosition();   
+    }
+
+    public void StartWorking()
+    {
+        ResetCondition();
+        gameObject.SetActive(true);
+        _mover.MoveForward();
     }
 }

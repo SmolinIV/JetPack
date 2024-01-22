@@ -4,10 +4,9 @@ using UnityEngine;
 
 [RequireComponent (typeof(BulletsPool))]
 
-public class Attacker : MonoBehaviour
+public class Attacker : MonoBehaviour, IStopable
 {
     [SerializeField] private ShootingFlash _shootingFlash;
-
     [SerializeField] private AudioSource _shootingSound;
 
     private BulletsPool _bulletPool;
@@ -29,5 +28,19 @@ public class Attacker : MonoBehaviour
 
             bullet.StartFlight(transform.right);
         }
+    }
+
+    public void StopWorking()
+    {
+        ResetCondition();
+    }
+
+    public void ResetCondition()
+    {
+        _bulletPool.DisableAllBullets();
+    }
+
+    public void StartWorking()
+    {
     }
 }

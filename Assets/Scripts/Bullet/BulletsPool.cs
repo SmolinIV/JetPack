@@ -40,4 +40,10 @@ public class BulletsPool : MonoBehaviour
 
         return false;
     }
+
+    public void DisableAllBullets()
+    {
+        foreach (Bullet bullet in _bullets)
+            bullet.gameObject.SetActive(false);
+    }
 }

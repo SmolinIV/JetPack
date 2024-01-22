@@ -24,7 +24,6 @@ public class Mover : MonoBehaviour
 
     public void ResetPosition() => transform.position = _startPosition;
 
-    public void StartMovingForward() => _rigidbody2D.velocity = new Vector2(_movingSpeed, 0);
+    public void MoveForward() => _rigidbody2D.velocity = new Vector2(_movingSpeed, 0);
 
-    public void Stop() => _rigidbody2D.velocity = new Vector2(0, 0);
 }

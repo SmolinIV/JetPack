@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnFrequency: 2
-  _upperLimitY: {fileID: 1860606942}
-  _lowerLimitY: {fileID: 156589770}
+  _upperLimitPosition: {fileID: 1860606942}
+  _lowerLimitPosition: {fileID: 156589770}
 --- !u!114 &67712094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,6 +941,7 @@ MonoBehaviour:
   _startScreen: {fileID: 606055792}
   _endScreen: {fileID: 1804074946}
   _player: {fileID: 1799878915}
+  _enemySpawner: {fileID: 67712093}
 --- !u!4 &1433052815
 Transform:
   m_ObjectHideFlags: 0
@@ -1758,10 +1759,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1433052815}
   - {fileID: 1867193947}
   - {fileID: 8542843569590916232}
   - {fileID: 1700793967}
   - {fileID: 67712091}
   - {fileID: 2032710923}
   - {fileID: 2113614864}
-  - {fileID: 1433052815}
