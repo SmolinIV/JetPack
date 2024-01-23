@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour, IStopable
 {
-    [SerializeField] private float _spawnFrequency = 2;
     [SerializeField] private Transform _upperLimitPosition;
     [SerializeField] private Transform _lowerLimitPosition;
+    [SerializeField] private float _spawnFrequency = 2;
 
     private EnemyPool _enemyPool;
     private Coroutine _spawningEnemies;
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour, IStopable
         _lowerLimitPosition.gameObject.SetActive(false);
     }
 
-    public void Start()
+    private void Start()
     {
         _startPosition = transform.position;
     }

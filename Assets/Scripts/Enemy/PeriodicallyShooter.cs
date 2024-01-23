@@ -17,10 +17,10 @@ public class PeriodicallyShooter : MonoBehaviour
         _attacker = GetComponent<Attacker>();
     }
 
-    private void Start()
-    {
-        _shooting = StartCoroutine(ShootWithDelay());
-    }
+    //private void Start()
+    //{
+    //    _shooting = StartCoroutine(ShootWithDelay());
+    //}
 
     private void OnEnable()
     {

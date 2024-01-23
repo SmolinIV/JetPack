@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletsPool : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private int _bulletCount = 10;
     [SerializeField] private Transform _bulletSpawnPoint;
+    [SerializeField] private int _bulletCount = 10;
 
     private List<Bullet> _bullets;
 

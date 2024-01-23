@@ -42,5 +42,6 @@ public class Attacker : MonoBehaviour, IStopable
 
     public void StartWorking()
     {
+        return;
     }
 }

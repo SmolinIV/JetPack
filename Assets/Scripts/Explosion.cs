@@ -14,8 +14,9 @@ public class Explosion : MonoBehaviour
         _sound = GetComponent<AudioSource>();
     }
 
-    public void Activate()
+    public void Activate(Vector3 position)
     {
+        transform.position = position;
         _sound.Play();
     }
 }

@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class Enemy : MonoBehaviour, IDamagable
+public class Enemy : MonoBehaviour, IDamagable, IInteractable
 {
+    public static event Action Destroyed;
+
     [SerializeField] private Explosion _explosionPrefab;
     [SerializeField] private float _speed = 3f;
 
@@ -28,16 +31,17 @@ public class Enemy : MonoBehaviour, IDamagable
         _rigidbody2D.velocity = transform.right * _speed;
     }
 
-    public void TakeCriticalHit()
+    public void TakeFatalHit()
     {
         Destroy();
+        Destroyed?.Invoke();
     }
 
     private void Destroy()
     {
         Explosion explosionEffect = Instantiate(_explosionPrefab);
-        explosionEffect.transform.position = transform.position;
-        explosionEffect.Activate();
+        explosionEffect.Activate(transform.position);
+
         gameObject.SetActive(false);
     }
 
